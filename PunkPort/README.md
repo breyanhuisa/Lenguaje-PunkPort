@@ -6,6 +6,13 @@ Este proyecto implementa un **analizador léxico y sintáctico** para un lenguaj
 Si el análisis tiene éxito, se genera un AST jerárquico utilizando anytree, y se imprime en la terminal en forma visual.
 ---
 
+## ⚙️ Requisitos
+
+Instala los siguientes paquetes antes de ejecutar el proyecto:
+
+bash
+pip install ply
+pip install anytree
 
 ## 📁 Estructura del Proyecto
 
@@ -24,12 +31,3 @@ PunkPort/
 ├── README.md             # Este archivo
 └── __pycache__/          # Archivos generados por Python
 
----
-
-## ⚙️ Requisitos
-
-Instala los siguientes paquetes antes de ejecutar el proyecto:
-
-```bash
-pip install ply
-pip install anytree
