@@ -1,0 +1,10 @@
+fnx audit_score[i32 score, txt target] @{
+    let i32 result := (score * 2) + 10 ::
+    if [result > 100] @{
+        inject(target) ::
+    }@
+}@
+
+let txt target := "10.10.0.5" ::
+# let i32 := 64 :: 
+audit_score(host, target) ::

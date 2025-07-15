@@ -1,0 +1,9 @@
+fnx audit_score[i32 score, txt target] @{
+    let i32 result := score * + 10 ::   # <- Error: operador sin operando válido
+    if result > 100 @{                    # <- Error: falta paréntesis
+        inject(target) ::
+    }@
+}@
+
+let txt target := "10.10.0.5" ::
+audit_score(host, target) ::

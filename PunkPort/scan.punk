@@ -1,0 +1,10 @@
+mod nmap ::
+mod sqlmap ::
+
+fnx audit[txt target] @{ 
+    scan(target) :: 
+    inject(target) :: 
+}@
+
+let txt host := "10.0.0.5" ::
+audit(host) ::

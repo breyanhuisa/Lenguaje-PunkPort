@@ -1,0 +1,14 @@
+# Esto es un comentario PunkPort
+
+mod nmap ::
+mod sqlmap ::
+
+fnx audit[txt target] @{ 
+    scan<target> ::
+    inject<target> ::
+}@  # <- Sintaxis correcta de cierre de función
+
+let txt host := "192.168.1.1" ::
+audit<host> :   # <- ERROR: falta doble colon al final
+
+@# Esto genera un error léxico (token inválido)

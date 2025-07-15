@@ -1,0 +1,928 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    LANGLE
+    RANGLE
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> statements
+Rule 2     statements -> statement statements
+Rule 3     statements -> statement
+Rule 4     statement -> MOD IDENTIFIER DOUBLECOLON
+Rule 5     statement -> FNX IDENTIFIER LBRACKET paramlist RBRACKET BLOCK_START statements BLOCK_END
+Rule 6     paramlist -> type IDENTIFIER
+Rule 7     paramlist -> type IDENTIFIER COMMA paramlist
+Rule 8     type -> TXT
+Rule 9     type -> I32
+Rule 10    type -> F64
+Rule 11    statement -> LET type IDENTIFIER ASSIGN expression DOUBLECOLON
+Rule 12    expression -> expression PLUS expression
+Rule 13    expression -> expression MINUS expression
+Rule 14    expression -> expression TIMES expression
+Rule 15    expression -> expression DIVIDE expression
+Rule 16    expression -> expression GT expression
+Rule 17    expression -> LPAREN expression RPAREN
+Rule 18    expression -> IDENTIFIER
+Rule 19    expression -> NUMBER
+Rule 20    expression -> STRING
+Rule 21    statement -> IF LBRACKET expression RBRACKET BLOCK_START statements BLOCK_END
+Rule 22    statement -> IDENTIFIER LPAREN args RPAREN DOUBLECOLON
+Rule 23    args -> expression
+Rule 24    args -> expression COMMA args
+
+Terminals, with rules where they appear
+
+ASSIGN               : 11
+BLOCK_END            : 5 21
+BLOCK_START          : 5 21
+COMMA                : 7 24
+DIVIDE               : 15
+DOUBLECOLON          : 4 11 22
+F64                  : 10
+FNX                  : 5
+GT                   : 16
+I32                  : 9
+IDENTIFIER           : 4 5 6 7 11 18 22
+IF                   : 21
+LANGLE               : 
+LBRACKET             : 5 21
+LET                  : 11
+LPAREN               : 17 22
+MINUS                : 13
+MOD                  : 4
+NUMBER               : 19
+PLUS                 : 12
+RANGLE               : 
+RBRACKET             : 5 21
+RPAREN               : 17 22
+STRING               : 20
+TIMES                : 14
+TXT                  : 8
+error                : 
+
+Nonterminals, with rules where they appear
+
+args                 : 22 24
+expression           : 11 12 12 13 13 14 14 15 15 16 16 17 21 23 24
+paramlist            : 5 7
+program              : 0
+statement            : 2 3
+statements           : 1 2 5 21
+type                 : 6 7 11
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . statements
+    (2) statements -> . statement statements
+    (3) statements -> . statement
+    (4) statement -> . MOD IDENTIFIER DOUBLECOLON
+    (5) statement -> . FNX IDENTIFIER LBRACKET paramlist RBRACKET BLOCK_START statements BLOCK_END
+    (11) statement -> . LET type IDENTIFIER ASSIGN expression DOUBLECOLON
+    (21) statement -> . IF LBRACKET expression RBRACKET BLOCK_START statements BLOCK_END
+    (22) statement -> . IDENTIFIER LPAREN args RPAREN DOUBLECOLON
+
+    MOD             shift and go to state 4
+    FNX             shift and go to state 6
+    LET             shift and go to state 7
+    IF              shift and go to state 8
+    IDENTIFIER      shift and go to state 5
+
+    program                        shift and go to state 1
+    statements                     shift and go to state 2
+    statement                      shift and go to state 3
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> statements .
+
+    $end            reduce using rule 1 (program -> statements .)
+
+
+state 3
+
+    (2) statements -> statement . statements
+    (3) statements -> statement .
+    (2) statements -> . statement statements
+    (3) statements -> . statement
+    (4) statement -> . MOD IDENTIFIER DOUBLECOLON
+    (5) statement -> . FNX IDENTIFIER LBRACKET paramlist RBRACKET BLOCK_START statements BLOCK_END
+    (11) statement -> . LET type IDENTIFIER ASSIGN expression DOUBLECOLON
+    (21) statement -> . IF LBRACKET expression RBRACKET BLOCK_START statements BLOCK_END
+    (22) statement -> . IDENTIFIER LPAREN args RPAREN DOUBLECOLON
+
+    $end            reduce using rule 3 (statements -> statement .)
+    BLOCK_END       reduce using rule 3 (statements -> statement .)
+    MOD             shift and go to state 4
+    FNX             shift and go to state 6
+    LET             shift and go to state 7
+    IF              shift and go to state 8
+    IDENTIFIER      shift and go to state 5
+
+    statement                      shift and go to state 3
+    statements                     shift and go to state 9
+
+state 4
+
+    (4) statement -> MOD . IDENTIFIER DOUBLECOLON
+
+    IDENTIFIER      shift and go to state 10
+
+
+state 5
+
+    (22) statement -> IDENTIFIER . LPAREN args RPAREN DOUBLECOLON
+
+    LPAREN          shift and go to state 11
+
+
+state 6
+
+    (5) statement -> FNX . IDENTIFIER LBRACKET paramlist RBRACKET BLOCK_START statements BLOCK_END
+
+    IDENTIFIER      shift and go to state 12
+
+
+state 7
+
+    (11) statement -> LET . type IDENTIFIER ASSIGN expression DOUBLECOLON
+    (8) type -> . TXT
+    (9) type -> . I32
+    (10) type -> . F64
+
+    TXT             shift and go to state 14
+    I32             shift and go to state 15
+    F64             shift and go to state 16
+
+    type                           shift and go to state 13
+
+state 8
+
+    (21) statement -> IF . LBRACKET expression RBRACKET BLOCK_START statements BLOCK_END
+
+    LBRACKET        shift and go to state 17
+
+
+state 9
+
+    (2) statements -> statement statements .
+
+    $end            reduce using rule 2 (statements -> statement statements .)
+    BLOCK_END       reduce using rule 2 (statements -> statement statements .)
+
+
+state 10
+
+    (4) statement -> MOD IDENTIFIER . DOUBLECOLON
+
+    DOUBLECOLON     shift and go to state 18
+
+
+state 11
+
+    (22) statement -> IDENTIFIER LPAREN . args RPAREN DOUBLECOLON
+    (23) args -> . expression
+    (24) args -> . expression COMMA args
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression TIMES expression
+    (15) expression -> . expression DIVIDE expression
+    (16) expression -> . expression GT expression
+    (17) expression -> . LPAREN expression RPAREN
+    (18) expression -> . IDENTIFIER
+    (19) expression -> . NUMBER
+    (20) expression -> . STRING
+
+    LPAREN          shift and go to state 20
+    IDENTIFIER      shift and go to state 19
+    NUMBER          shift and go to state 23
+    STRING          shift and go to state 24
+
+    args                           shift and go to state 21
+    expression                     shift and go to state 22
+
+state 12
+
+    (5) statement -> FNX IDENTIFIER . LBRACKET paramlist RBRACKET BLOCK_START statements BLOCK_END
+
+    LBRACKET        shift and go to state 25
+
+
+state 13
+
+    (11) statement -> LET type . IDENTIFIER ASSIGN expression DOUBLECOLON
+
+    IDENTIFIER      shift and go to state 26
+
+
+state 14
+
+    (8) type -> TXT .
+
+    IDENTIFIER      reduce using rule 8 (type -> TXT .)
+
+
+state 15
+
+    (9) type -> I32 .
+
+    IDENTIFIER      reduce using rule 9 (type -> I32 .)
+
+
+state 16
+
+    (10) type -> F64 .
+
+    IDENTIFIER      reduce using rule 10 (type -> F64 .)
+
+
+state 17
+
+    (21) statement -> IF LBRACKET . expression RBRACKET BLOCK_START statements BLOCK_END
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression TIMES expression
+    (15) expression -> . expression DIVIDE expression
+    (16) expression -> . expression GT expression
+    (17) expression -> . LPAREN expression RPAREN
+    (18) expression -> . IDENTIFIER
+    (19) expression -> . NUMBER
+    (20) expression -> . STRING
+
+    LPAREN          shift and go to state 20
+    IDENTIFIER      shift and go to state 19
+    NUMBER          shift and go to state 23
+    STRING          shift and go to state 24
+
+    expression                     shift and go to state 27
+
+state 18
+
+    (4) statement -> MOD IDENTIFIER DOUBLECOLON .
+
+    MOD             reduce using rule 4 (statement -> MOD IDENTIFIER DOUBLECOLON .)
+    FNX             reduce using rule 4 (statement -> MOD IDENTIFIER DOUBLECOLON .)
+    LET             reduce using rule 4 (statement -> MOD IDENTIFIER DOUBLECOLON .)
+    IF              reduce using rule 4 (statement -> MOD IDENTIFIER DOUBLECOLON .)
+    IDENTIFIER      reduce using rule 4 (statement -> MOD IDENTIFIER DOUBLECOLON .)
+    $end            reduce using rule 4 (statement -> MOD IDENTIFIER DOUBLECOLON .)
+    BLOCK_END       reduce using rule 4 (statement -> MOD IDENTIFIER DOUBLECOLON .)
+
+
+state 19
+
+    (18) expression -> IDENTIFIER .
+
+    COMMA           reduce using rule 18 (expression -> IDENTIFIER .)
+    PLUS            reduce using rule 18 (expression -> IDENTIFIER .)
+    MINUS           reduce using rule 18 (expression -> IDENTIFIER .)
+    TIMES           reduce using rule 18 (expression -> IDENTIFIER .)
+    DIVIDE          reduce using rule 18 (expression -> IDENTIFIER .)
+    GT              reduce using rule 18 (expression -> IDENTIFIER .)
+    RPAREN          reduce using rule 18 (expression -> IDENTIFIER .)
+    RBRACKET        reduce using rule 18 (expression -> IDENTIFIER .)
+    DOUBLECOLON     reduce using rule 18 (expression -> IDENTIFIER .)
+
+
+state 20
+
+    (17) expression -> LPAREN . expression RPAREN
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression TIMES expression
+    (15) expression -> . expression DIVIDE expression
+    (16) expression -> . expression GT expression
+    (17) expression -> . LPAREN expression RPAREN
+    (18) expression -> . IDENTIFIER
+    (19) expression -> . NUMBER
+    (20) expression -> . STRING
+
+    LPAREN          shift and go to state 20
+    IDENTIFIER      shift and go to state 19
+    NUMBER          shift and go to state 23
+    STRING          shift and go to state 24
+
+    expression                     shift and go to state 28
+
+state 21
+
+    (22) statement -> IDENTIFIER LPAREN args . RPAREN DOUBLECOLON
+
+    RPAREN          shift and go to state 29
+
+
+state 22
+
+    (23) args -> expression .
+    (24) args -> expression . COMMA args
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . TIMES expression
+    (15) expression -> expression . DIVIDE expression
+    (16) expression -> expression . GT expression
+
+    RPAREN          reduce using rule 23 (args -> expression .)
+    COMMA           shift and go to state 30
+    PLUS            shift and go to state 31
+    MINUS           shift and go to state 32
+    TIMES           shift and go to state 33
+    DIVIDE          shift and go to state 34
+    GT              shift and go to state 35
+
+
+state 23
+
+    (19) expression -> NUMBER .
+
+    COMMA           reduce using rule 19 (expression -> NUMBER .)
+    PLUS            reduce using rule 19 (expression -> NUMBER .)
+    MINUS           reduce using rule 19 (expression -> NUMBER .)
+    TIMES           reduce using rule 19 (expression -> NUMBER .)
+    DIVIDE          reduce using rule 19 (expression -> NUMBER .)
+    GT              reduce using rule 19 (expression -> NUMBER .)
+    RPAREN          reduce using rule 19 (expression -> NUMBER .)
+    RBRACKET        reduce using rule 19 (expression -> NUMBER .)
+    DOUBLECOLON     reduce using rule 19 (expression -> NUMBER .)
+
+
+state 24
+
+    (20) expression -> STRING .
+
+    COMMA           reduce using rule 20 (expression -> STRING .)
+    PLUS            reduce using rule 20 (expression -> STRING .)
+    MINUS           reduce using rule 20 (expression -> STRING .)
+    TIMES           reduce using rule 20 (expression -> STRING .)
+    DIVIDE          reduce using rule 20 (expression -> STRING .)
+    GT              reduce using rule 20 (expression -> STRING .)
+    RPAREN          reduce using rule 20 (expression -> STRING .)
+    RBRACKET        reduce using rule 20 (expression -> STRING .)
+    DOUBLECOLON     reduce using rule 20 (expression -> STRING .)
+
+
+state 25
+
+    (5) statement -> FNX IDENTIFIER LBRACKET . paramlist RBRACKET BLOCK_START statements BLOCK_END
+    (6) paramlist -> . type IDENTIFIER
+    (7) paramlist -> . type IDENTIFIER COMMA paramlist
+    (8) type -> . TXT
+    (9) type -> . I32
+    (10) type -> . F64
+
+    TXT             shift and go to state 14
+    I32             shift and go to state 15
+    F64             shift and go to state 16
+
+    paramlist                      shift and go to state 36
+    type                           shift and go to state 37
+
+state 26
+
+    (11) statement -> LET type IDENTIFIER . ASSIGN expression DOUBLECOLON
+
+    ASSIGN          shift and go to state 38
+
+
+state 27
+
+    (21) statement -> IF LBRACKET expression . RBRACKET BLOCK_START statements BLOCK_END
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . TIMES expression
+    (15) expression -> expression . DIVIDE expression
+    (16) expression -> expression . GT expression
+
+    RBRACKET        shift and go to state 39
+    PLUS            shift and go to state 31
+    MINUS           shift and go to state 32
+    TIMES           shift and go to state 33
+    DIVIDE          shift and go to state 34
+    GT              shift and go to state 35
+
+
+state 28
+
+    (17) expression -> LPAREN expression . RPAREN
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . TIMES expression
+    (15) expression -> expression . DIVIDE expression
+    (16) expression -> expression . GT expression
+
+    RPAREN          shift and go to state 40
+    PLUS            shift and go to state 31
+    MINUS           shift and go to state 32
+    TIMES           shift and go to state 33
+    DIVIDE          shift and go to state 34
+    GT              shift and go to state 35
+
+
+state 29
+
+    (22) statement -> IDENTIFIER LPAREN args RPAREN . DOUBLECOLON
+
+    DOUBLECOLON     shift and go to state 41
+
+
+state 30
+
+    (24) args -> expression COMMA . args
+    (23) args -> . expression
+    (24) args -> . expression COMMA args
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression TIMES expression
+    (15) expression -> . expression DIVIDE expression
+    (16) expression -> . expression GT expression
+    (17) expression -> . LPAREN expression RPAREN
+    (18) expression -> . IDENTIFIER
+    (19) expression -> . NUMBER
+    (20) expression -> . STRING
+
+    LPAREN          shift and go to state 20
+    IDENTIFIER      shift and go to state 19
+    NUMBER          shift and go to state 23
+    STRING          shift and go to state 24
+
+    expression                     shift and go to state 22
+    args                           shift and go to state 42
+
+state 31
+
+    (12) expression -> expression PLUS . expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression TIMES expression
+    (15) expression -> . expression DIVIDE expression
+    (16) expression -> . expression GT expression
+    (17) expression -> . LPAREN expression RPAREN
+    (18) expression -> . IDENTIFIER
+    (19) expression -> . NUMBER
+    (20) expression -> . STRING
+
+    LPAREN          shift and go to state 20
+    IDENTIFIER      shift and go to state 19
+    NUMBER          shift and go to state 23
+    STRING          shift and go to state 24
+
+    expression                     shift and go to state 43
+
+state 32
+
+    (13) expression -> expression MINUS . expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression TIMES expression
+    (15) expression -> . expression DIVIDE expression
+    (16) expression -> . expression GT expression
+    (17) expression -> . LPAREN expression RPAREN
+    (18) expression -> . IDENTIFIER
+    (19) expression -> . NUMBER
+    (20) expression -> . STRING
+
+    LPAREN          shift and go to state 20
+    IDENTIFIER      shift and go to state 19
+    NUMBER          shift and go to state 23
+    STRING          shift and go to state 24
+
+    expression                     shift and go to state 44
+
+state 33
+
+    (14) expression -> expression TIMES . expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression TIMES expression
+    (15) expression -> . expression DIVIDE expression
+    (16) expression -> . expression GT expression
+    (17) expression -> . LPAREN expression RPAREN
+    (18) expression -> . IDENTIFIER
+    (19) expression -> . NUMBER
+    (20) expression -> . STRING
+
+    LPAREN          shift and go to state 20
+    IDENTIFIER      shift and go to state 19
+    NUMBER          shift and go to state 23
+    STRING          shift and go to state 24
+
+    expression                     shift and go to state 45
+
+state 34
+
+    (15) expression -> expression DIVIDE . expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression TIMES expression
+    (15) expression -> . expression DIVIDE expression
+    (16) expression -> . expression GT expression
+    (17) expression -> . LPAREN expression RPAREN
+    (18) expression -> . IDENTIFIER
+    (19) expression -> . NUMBER
+    (20) expression -> . STRING
+
+    LPAREN          shift and go to state 20
+    IDENTIFIER      shift and go to state 19
+    NUMBER          shift and go to state 23
+    STRING          shift and go to state 24
+
+    expression                     shift and go to state 46
+
+state 35
+
+    (16) expression -> expression GT . expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression TIMES expression
+    (15) expression -> . expression DIVIDE expression
+    (16) expression -> . expression GT expression
+    (17) expression -> . LPAREN expression RPAREN
+    (18) expression -> . IDENTIFIER
+    (19) expression -> . NUMBER
+    (20) expression -> . STRING
+
+    LPAREN          shift and go to state 20
+    IDENTIFIER      shift and go to state 19
+    NUMBER          shift and go to state 23
+    STRING          shift and go to state 24
+
+    expression                     shift and go to state 47
+
+state 36
+
+    (5) statement -> FNX IDENTIFIER LBRACKET paramlist . RBRACKET BLOCK_START statements BLOCK_END
+
+    RBRACKET        shift and go to state 48
+
+
+state 37
+
+    (6) paramlist -> type . IDENTIFIER
+    (7) paramlist -> type . IDENTIFIER COMMA paramlist
+
+    IDENTIFIER      shift and go to state 49
+
+
+state 38
+
+    (11) statement -> LET type IDENTIFIER ASSIGN . expression DOUBLECOLON
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression TIMES expression
+    (15) expression -> . expression DIVIDE expression
+    (16) expression -> . expression GT expression
+    (17) expression -> . LPAREN expression RPAREN
+    (18) expression -> . IDENTIFIER
+    (19) expression -> . NUMBER
+    (20) expression -> . STRING
+
+    LPAREN          shift and go to state 20
+    IDENTIFIER      shift and go to state 19
+    NUMBER          shift and go to state 23
+    STRING          shift and go to state 24
+
+    expression                     shift and go to state 50
+
+state 39
+
+    (21) statement -> IF LBRACKET expression RBRACKET . BLOCK_START statements BLOCK_END
+
+    BLOCK_START     shift and go to state 51
+
+
+state 40
+
+    (17) expression -> LPAREN expression RPAREN .
+
+    COMMA           reduce using rule 17 (expression -> LPAREN expression RPAREN .)
+    PLUS            reduce using rule 17 (expression -> LPAREN expression RPAREN .)
+    MINUS           reduce using rule 17 (expression -> LPAREN expression RPAREN .)
+    TIMES           reduce using rule 17 (expression -> LPAREN expression RPAREN .)
+    DIVIDE          reduce using rule 17 (expression -> LPAREN expression RPAREN .)
+    GT              reduce using rule 17 (expression -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 17 (expression -> LPAREN expression RPAREN .)
+    RBRACKET        reduce using rule 17 (expression -> LPAREN expression RPAREN .)
+    DOUBLECOLON     reduce using rule 17 (expression -> LPAREN expression RPAREN .)
+
+
+state 41
+
+    (22) statement -> IDENTIFIER LPAREN args RPAREN DOUBLECOLON .
+
+    MOD             reduce using rule 22 (statement -> IDENTIFIER LPAREN args RPAREN DOUBLECOLON .)
+    FNX             reduce using rule 22 (statement -> IDENTIFIER LPAREN args RPAREN DOUBLECOLON .)
+    LET             reduce using rule 22 (statement -> IDENTIFIER LPAREN args RPAREN DOUBLECOLON .)
+    IF              reduce using rule 22 (statement -> IDENTIFIER LPAREN args RPAREN DOUBLECOLON .)
+    IDENTIFIER      reduce using rule 22 (statement -> IDENTIFIER LPAREN args RPAREN DOUBLECOLON .)
+    $end            reduce using rule 22 (statement -> IDENTIFIER LPAREN args RPAREN DOUBLECOLON .)
+    BLOCK_END       reduce using rule 22 (statement -> IDENTIFIER LPAREN args RPAREN DOUBLECOLON .)
+
+
+state 42
+
+    (24) args -> expression COMMA args .
+
+    RPAREN          reduce using rule 24 (args -> expression COMMA args .)
+
+
+state 43
+
+    (12) expression -> expression PLUS expression .
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . TIMES expression
+    (15) expression -> expression . DIVIDE expression
+    (16) expression -> expression . GT expression
+
+    COMMA           reduce using rule 12 (expression -> expression PLUS expression .)
+    PLUS            reduce using rule 12 (expression -> expression PLUS expression .)
+    MINUS           reduce using rule 12 (expression -> expression PLUS expression .)
+    GT              reduce using rule 12 (expression -> expression PLUS expression .)
+    RPAREN          reduce using rule 12 (expression -> expression PLUS expression .)
+    RBRACKET        reduce using rule 12 (expression -> expression PLUS expression .)
+    DOUBLECOLON     reduce using rule 12 (expression -> expression PLUS expression .)
+    TIMES           shift and go to state 33
+    DIVIDE          shift and go to state 34
+
+  ! TIMES           [ reduce using rule 12 (expression -> expression PLUS expression .) ]
+  ! DIVIDE          [ reduce using rule 12 (expression -> expression PLUS expression .) ]
+  ! PLUS            [ shift and go to state 31 ]
+  ! MINUS           [ shift and go to state 32 ]
+  ! GT              [ shift and go to state 35 ]
+
+
+state 44
+
+    (13) expression -> expression MINUS expression .
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . TIMES expression
+    (15) expression -> expression . DIVIDE expression
+    (16) expression -> expression . GT expression
+
+    COMMA           reduce using rule 13 (expression -> expression MINUS expression .)
+    PLUS            reduce using rule 13 (expression -> expression MINUS expression .)
+    MINUS           reduce using rule 13 (expression -> expression MINUS expression .)
+    GT              reduce using rule 13 (expression -> expression MINUS expression .)
+    RPAREN          reduce using rule 13 (expression -> expression MINUS expression .)
+    RBRACKET        reduce using rule 13 (expression -> expression MINUS expression .)
+    DOUBLECOLON     reduce using rule 13 (expression -> expression MINUS expression .)
+    TIMES           shift and go to state 33
+    DIVIDE          shift and go to state 34
+
+  ! TIMES           [ reduce using rule 13 (expression -> expression MINUS expression .) ]
+  ! DIVIDE          [ reduce using rule 13 (expression -> expression MINUS expression .) ]
+  ! PLUS            [ shift and go to state 31 ]
+  ! MINUS           [ shift and go to state 32 ]
+  ! GT              [ shift and go to state 35 ]
+
+
+state 45
+
+    (14) expression -> expression TIMES expression .
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . TIMES expression
+    (15) expression -> expression . DIVIDE expression
+    (16) expression -> expression . GT expression
+
+    COMMA           reduce using rule 14 (expression -> expression TIMES expression .)
+    PLUS            reduce using rule 14 (expression -> expression TIMES expression .)
+    MINUS           reduce using rule 14 (expression -> expression TIMES expression .)
+    TIMES           reduce using rule 14 (expression -> expression TIMES expression .)
+    DIVIDE          reduce using rule 14 (expression -> expression TIMES expression .)
+    GT              reduce using rule 14 (expression -> expression TIMES expression .)
+    RPAREN          reduce using rule 14 (expression -> expression TIMES expression .)
+    RBRACKET        reduce using rule 14 (expression -> expression TIMES expression .)
+    DOUBLECOLON     reduce using rule 14 (expression -> expression TIMES expression .)
+
+  ! PLUS            [ shift and go to state 31 ]
+  ! MINUS           [ shift and go to state 32 ]
+  ! TIMES           [ shift and go to state 33 ]
+  ! DIVIDE          [ shift and go to state 34 ]
+  ! GT              [ shift and go to state 35 ]
+
+
+state 46
+
+    (15) expression -> expression DIVIDE expression .
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . TIMES expression
+    (15) expression -> expression . DIVIDE expression
+    (16) expression -> expression . GT expression
+
+    COMMA           reduce using rule 15 (expression -> expression DIVIDE expression .)
+    PLUS            reduce using rule 15 (expression -> expression DIVIDE expression .)
+    MINUS           reduce using rule 15 (expression -> expression DIVIDE expression .)
+    TIMES           reduce using rule 15 (expression -> expression DIVIDE expression .)
+    DIVIDE          reduce using rule 15 (expression -> expression DIVIDE expression .)
+    GT              reduce using rule 15 (expression -> expression DIVIDE expression .)
+    RPAREN          reduce using rule 15 (expression -> expression DIVIDE expression .)
+    RBRACKET        reduce using rule 15 (expression -> expression DIVIDE expression .)
+    DOUBLECOLON     reduce using rule 15 (expression -> expression DIVIDE expression .)
+
+  ! PLUS            [ shift and go to state 31 ]
+  ! MINUS           [ shift and go to state 32 ]
+  ! TIMES           [ shift and go to state 33 ]
+  ! DIVIDE          [ shift and go to state 34 ]
+  ! GT              [ shift and go to state 35 ]
+
+
+state 47
+
+    (16) expression -> expression GT expression .
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . TIMES expression
+    (15) expression -> expression . DIVIDE expression
+    (16) expression -> expression . GT expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for GT resolved as shift
+    COMMA           reduce using rule 16 (expression -> expression GT expression .)
+    RPAREN          reduce using rule 16 (expression -> expression GT expression .)
+    RBRACKET        reduce using rule 16 (expression -> expression GT expression .)
+    DOUBLECOLON     reduce using rule 16 (expression -> expression GT expression .)
+    PLUS            shift and go to state 31
+    MINUS           shift and go to state 32
+    TIMES           shift and go to state 33
+    DIVIDE          shift and go to state 34
+    GT              shift and go to state 35
+
+  ! PLUS            [ reduce using rule 16 (expression -> expression GT expression .) ]
+  ! MINUS           [ reduce using rule 16 (expression -> expression GT expression .) ]
+  ! TIMES           [ reduce using rule 16 (expression -> expression GT expression .) ]
+  ! DIVIDE          [ reduce using rule 16 (expression -> expression GT expression .) ]
+  ! GT              [ reduce using rule 16 (expression -> expression GT expression .) ]
+
+
+state 48
+
+    (5) statement -> FNX IDENTIFIER LBRACKET paramlist RBRACKET . BLOCK_START statements BLOCK_END
+
+    BLOCK_START     shift and go to state 52
+
+
+state 49
+
+    (6) paramlist -> type IDENTIFIER .
+    (7) paramlist -> type IDENTIFIER . COMMA paramlist
+
+    RBRACKET        reduce using rule 6 (paramlist -> type IDENTIFIER .)
+    COMMA           shift and go to state 53
+
+
+state 50
+
+    (11) statement -> LET type IDENTIFIER ASSIGN expression . DOUBLECOLON
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . TIMES expression
+    (15) expression -> expression . DIVIDE expression
+    (16) expression -> expression . GT expression
+
+    DOUBLECOLON     shift and go to state 54
+    PLUS            shift and go to state 31
+    MINUS           shift and go to state 32
+    TIMES           shift and go to state 33
+    DIVIDE          shift and go to state 34
+    GT              shift and go to state 35
+
+
+state 51
+
+    (21) statement -> IF LBRACKET expression RBRACKET BLOCK_START . statements BLOCK_END
+    (2) statements -> . statement statements
+    (3) statements -> . statement
+    (4) statement -> . MOD IDENTIFIER DOUBLECOLON
+    (5) statement -> . FNX IDENTIFIER LBRACKET paramlist RBRACKET BLOCK_START statements BLOCK_END
+    (11) statement -> . LET type IDENTIFIER ASSIGN expression DOUBLECOLON
+    (21) statement -> . IF LBRACKET expression RBRACKET BLOCK_START statements BLOCK_END
+    (22) statement -> . IDENTIFIER LPAREN args RPAREN DOUBLECOLON
+
+    MOD             shift and go to state 4
+    FNX             shift and go to state 6
+    LET             shift and go to state 7
+    IF              shift and go to state 8
+    IDENTIFIER      shift and go to state 5
+
+    statements                     shift and go to state 55
+    statement                      shift and go to state 3
+
+state 52
+
+    (5) statement -> FNX IDENTIFIER LBRACKET paramlist RBRACKET BLOCK_START . statements BLOCK_END
+    (2) statements -> . statement statements
+    (3) statements -> . statement
+    (4) statement -> . MOD IDENTIFIER DOUBLECOLON
+    (5) statement -> . FNX IDENTIFIER LBRACKET paramlist RBRACKET BLOCK_START statements BLOCK_END
+    (11) statement -> . LET type IDENTIFIER ASSIGN expression DOUBLECOLON
+    (21) statement -> . IF LBRACKET expression RBRACKET BLOCK_START statements BLOCK_END
+    (22) statement -> . IDENTIFIER LPAREN args RPAREN DOUBLECOLON
+
+    MOD             shift and go to state 4
+    FNX             shift and go to state 6
+    LET             shift and go to state 7
+    IF              shift and go to state 8
+    IDENTIFIER      shift and go to state 5
+
+    statements                     shift and go to state 56
+    statement                      shift and go to state 3
+
+state 53
+
+    (7) paramlist -> type IDENTIFIER COMMA . paramlist
+    (6) paramlist -> . type IDENTIFIER
+    (7) paramlist -> . type IDENTIFIER COMMA paramlist
+    (8) type -> . TXT
+    (9) type -> . I32
+    (10) type -> . F64
+
+    TXT             shift and go to state 14
+    I32             shift and go to state 15
+    F64             shift and go to state 16
+
+    type                           shift and go to state 37
+    paramlist                      shift and go to state 57
+
+state 54
+
+    (11) statement -> LET type IDENTIFIER ASSIGN expression DOUBLECOLON .
+
+    MOD             reduce using rule 11 (statement -> LET type IDENTIFIER ASSIGN expression DOUBLECOLON .)
+    FNX             reduce using rule 11 (statement -> LET type IDENTIFIER ASSIGN expression DOUBLECOLON .)
+    LET             reduce using rule 11 (statement -> LET type IDENTIFIER ASSIGN expression DOUBLECOLON .)
+    IF              reduce using rule 11 (statement -> LET type IDENTIFIER ASSIGN expression DOUBLECOLON .)
+    IDENTIFIER      reduce using rule 11 (statement -> LET type IDENTIFIER ASSIGN expression DOUBLECOLON .)
+    $end            reduce using rule 11 (statement -> LET type IDENTIFIER ASSIGN expression DOUBLECOLON .)
+    BLOCK_END       reduce using rule 11 (statement -> LET type IDENTIFIER ASSIGN expression DOUBLECOLON .)
+
+
+state 55
+
+    (21) statement -> IF LBRACKET expression RBRACKET BLOCK_START statements . BLOCK_END
+
+    BLOCK_END       shift and go to state 58
+
+
+state 56
+
+    (5) statement -> FNX IDENTIFIER LBRACKET paramlist RBRACKET BLOCK_START statements . BLOCK_END
+
+    BLOCK_END       shift and go to state 59
+
+
+state 57
+
+    (7) paramlist -> type IDENTIFIER COMMA paramlist .
+
+    RBRACKET        reduce using rule 7 (paramlist -> type IDENTIFIER COMMA paramlist .)
+
+
+state 58
+
+    (21) statement -> IF LBRACKET expression RBRACKET BLOCK_START statements BLOCK_END .
+
+    MOD             reduce using rule 21 (statement -> IF LBRACKET expression RBRACKET BLOCK_START statements BLOCK_END .)
+    FNX             reduce using rule 21 (statement -> IF LBRACKET expression RBRACKET BLOCK_START statements BLOCK_END .)
+    LET             reduce using rule 21 (statement -> IF LBRACKET expression RBRACKET BLOCK_START statements BLOCK_END .)
+    IF              reduce using rule 21 (statement -> IF LBRACKET expression RBRACKET BLOCK_START statements BLOCK_END .)
+    IDENTIFIER      reduce using rule 21 (statement -> IF LBRACKET expression RBRACKET BLOCK_START statements BLOCK_END .)
+    $end            reduce using rule 21 (statement -> IF LBRACKET expression RBRACKET BLOCK_START statements BLOCK_END .)
+    BLOCK_END       reduce using rule 21 (statement -> IF LBRACKET expression RBRACKET BLOCK_START statements BLOCK_END .)
+
+
+state 59
+
+    (5) statement -> FNX IDENTIFIER LBRACKET paramlist RBRACKET BLOCK_START statements BLOCK_END .
+
+    MOD             reduce using rule 5 (statement -> FNX IDENTIFIER LBRACKET paramlist RBRACKET BLOCK_START statements BLOCK_END .)
+    FNX             reduce using rule 5 (statement -> FNX IDENTIFIER LBRACKET paramlist RBRACKET BLOCK_START statements BLOCK_END .)
+    LET             reduce using rule 5 (statement -> FNX IDENTIFIER LBRACKET paramlist RBRACKET BLOCK_START statements BLOCK_END .)
+    IF              reduce using rule 5 (statement -> FNX IDENTIFIER LBRACKET paramlist RBRACKET BLOCK_START statements BLOCK_END .)
+    IDENTIFIER      reduce using rule 5 (statement -> FNX IDENTIFIER LBRACKET paramlist RBRACKET BLOCK_START statements BLOCK_END .)
+    $end            reduce using rule 5 (statement -> FNX IDENTIFIER LBRACKET paramlist RBRACKET BLOCK_START statements BLOCK_END .)
+    BLOCK_END       reduce using rule 5 (statement -> FNX IDENTIFIER LBRACKET paramlist RBRACKET BLOCK_START statements BLOCK_END .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for PLUS in state 47 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 47 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 47 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 47 resolved as shift
+WARNING: shift/reduce conflict for GT in state 47 resolved as shift
